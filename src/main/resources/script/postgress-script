@@ -1,0 +1,46 @@
+create database springsecuritydb;
+
+CREATE ROLE springsecurityuser WITH LOGIN PASSWORD 'spring-security';
+
+GRANT ALL ON users TO springsecurityuser;
+
+ CREATE TABLE users (
+id SERIAL NOT NULL,
+username VARCHAR(45) NOT NULL,
+password VARCHAR(45) NOT NULL,
+enabled INT NOT NULL,
+PRIMARY KEY (id));
+
+INSERT INTO users (username,password,enabled) VALUES ('happy', '12345', '1');
+INSERT INTO users (username,password,enabled) VALUES ('admin', '12345', '1');
+INSERT INTO users (username,password,enabled) VALUES ('test', '12345', '1');
+
+
+CREATE TABLE authorities (
+  id SERIAL NOT NULL,
+  username varchar(45) NOT NULL,
+  authority varchar(45) NOT NULL,
+  PRIMARY KEY (id));
+
+
+INSERT  INTO authorities (username,authority) VALUES ('happy', 'write');
+INSERT  INTO authorities (username,authority) VALUES ( 'admin', 'write');
+INSERT  INTO authorities (username,authority) VALUES ( 'test', 'write');
+
+
+CREATE SEQUENCE customer_seq
+INCREMENT 1
+START 100;
+
+CREATE TABLE customer (
+  id SERIAL NOT NULL ,
+  email varchar(45) NOT NULL,
+  pwd varchar(200) NOT NULL,
+  role varchar(45) NOT NULL,
+  PRIMARY KEY (id)
+);
+
+
+INSERT INTO customer (email,pwd,role) VALUES ('happy@example.com', '54321', 'customer');
+INSERT INTO customer (email,pwd,role) VALUES ('admin@example.com', '54321', 'admin');
+INSERT INTO customer (email,pwd,role) VALUES ('test@example.com', '54321', 'tester');
